@@ -24,6 +24,7 @@ $(BUILD_DIR)/kernel_entry.o: $(SRC_DIR)/kernel_entry.asm always
 	$(ASM) $< -f elf64 -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c always
+	mkdir -p $(dir $@)
 	$(CC) -m64 -ffreestanding -fno-stack-protector -nostdlib -c $< -o $@
 
 always:
