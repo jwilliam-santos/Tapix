@@ -1,7 +1,7 @@
 #ifndef IDT_H
 #define IDT_H
 
-#include "utypes.h"
+#include "../LibC/utypes.h"
 #include "vga.h"
 
 extern void load_IDT();
