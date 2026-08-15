@@ -1,19 +1,37 @@
-ASM=nasm
-BOOT_DIR = bootloader
-SRC_DIR=src
-BUILD_DIR=build
+ASM = nasm
+CC = gcc
+SRC_DIR = kernel
+BUILD_DIR = build
+ISO_DIR = iso
 
-$(BUILD_DIR)/tapix_floppy.img: $(BUILD_DIR)/tapix.bin
-	cp $(BUILD_DIR)/tapix.bin $(BUILD_DIR)/main_floppy.img
-	truncate -s 1440k $(BUILD_DIR)/main_floppy.img
-	
-$(BUILD_DIR)/tapix.bin: $(BOOT_DIR)/boot.asm
+C_SOURCES := $(shell find $(SRC_DIR) -name "*.c")
+C_OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(C_SOURCES))
+
+.PHONY: all iso kernel clean always run
+
+all: iso
+
+iso: kernel
+	cp $(BUILD_DIR)/kernel.bin $(ISO_DIR)/boot/kernel.bin
+	grub-mkrescue -o $(BUILD_DIR)/Tapix.iso $(ISO_DIR)
+
+kernel: always $(BUILD_DIR)/kernel_entry.o $(C_OBJECTS)
+	$(CC) -m32 -ffreestanding -nostdlib -T linker.ld \
+		$(BUILD_DIR)/kernel_entry.o $(C_OBJECTS) \
+		-o $(BUILD_DIR)/kernel.bin
+
+$(BUILD_DIR)/kernel_entry.o: $(SRC_DIR)/kernel_entry.asm always
+	$(ASM) $< -f elf32 -o $@
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c always
+	$(CC) -m32 -ffreestanding -fno-stack-protector -nostdlib -c $< -o $@
+
+always:
 	mkdir -p $(BUILD_DIR)
-	$(ASM) $(BOOT_DIR)/boot.asm -f bin -o $(BUILD_DIR)/tapix.bin
 
-run: $(BUILD_DIR)/tapix_floppy.img
-	qemu-system-x86_64 -machine pc -cpu qemu64 -drive format=raw,file=$(BUILD_DIR)/main_floppy.img
-
+run: iso
+	qemu-system-x86_64 -cdrom $(BUILD_DIR)/Tapix.iso
 
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -f $(ISO_DIR)/boot/kernel.bin
