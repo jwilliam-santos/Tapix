@@ -16,15 +16,15 @@ iso: kernel
 	grub-mkrescue -o $(BUILD_DIR)/Tapix.iso $(ISO_DIR)
 
 kernel: always $(BUILD_DIR)/kernel_entry.o $(C_OBJECTS)
-	$(CC) -m32 -ffreestanding -nostdlib -T linker.ld \
+	$(CC) -m64 -ffreestanding -nostdlib -no-pie -T linker.ld \
 		$(BUILD_DIR)/kernel_entry.o $(C_OBJECTS) \
 		-o $(BUILD_DIR)/kernel.bin
 
 $(BUILD_DIR)/kernel_entry.o: $(SRC_DIR)/kernel_entry.asm always
-	$(ASM) $< -f elf32 -o $@
+	$(ASM) $< -f elf64 -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c always
-	$(CC) -m32 -ffreestanding -fno-stack-protector -nostdlib -c $< -o $@
+	$(CC) -m64 -ffreestanding -fno-stack-protector -nostdlib -c $< -o $@
 
 always:
 	mkdir -p $(BUILD_DIR)
