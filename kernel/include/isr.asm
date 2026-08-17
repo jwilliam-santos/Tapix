@@ -1,11 +1,84 @@
-extern division_error_handler
-;colocar extern da func do ero
+;extern
+extern isr0
+extern isr1
+extern isr2
+extern isr3
+extern isr4
+extern isr5
+extern isr6
+extern isr7
+extern isr8
+extern isr9
+extern isr10
+extern isr11
+extern isr12
+extern isr13
+extern isr14
+extern isr15
+extern isr16
+extern isr17
+extern isr18
+extern isr19
+extern isr20
+extern isr21
+extern irq0
+extern irq1
+extern irq2
+extern irq3
+extern irq4
+extern irq5
+extern irq6
+extern irq7
+extern irq8
+extern irq9
+extern irq10
+extern irq11
+extern irq12
+extern irq13
+extern irq14
+extern irq15
 global ir0
 
 ir0:
     pushad
-
-    call division_error_handler
     ;call nome da func
+    call isr0
+    call isr1
+    call isr2
+    call isr3
+    call isr4
+    call isr5
+    call isr6
+    call isr7
+    call isr8
+    call isr9
+    call isr10
+    call isr11
+    call isr12
+    call isr13
+    call isr14
+    call isr15
+    call isr16
+    call isr17
+    call isr18
+    call isr19
+    call isr20
+    call isr21
+    call irq0
+    call irq1
+    call irq2
+    call irq3
+    call irq4
+    call irq5
+    call irq6
+    call irq7
+    call irq8
+    call irq9
+    call irq10
+    call irq11
+    call irq12
+    call irq13
+    call irq14
+    call irq15
     popad
     iret
