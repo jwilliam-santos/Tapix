@@ -5,7 +5,7 @@ typedef unsigned long long size_t;
 void* calloc(size_t nmemb, size_t size);
 void  free(void* ptr);
 void* malloc(size_t size);
-void* realloc(void* ptr, size_t size);
+void* realloc(void* ptr, size_t size);//feito posteriomente
 char* itoa(unsigned long num);
 
 
