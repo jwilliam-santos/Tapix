@@ -4,7 +4,7 @@ void kernel_main(void)
 {
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
     
-    vga_print("Hello World,Tapix!");
+    vga_print(">");
     // vga_print(itoa((unsigned long)ptr)); //MOSTRA VALOR onde kernel termina
   
     while(1);

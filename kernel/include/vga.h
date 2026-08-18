@@ -23,7 +23,9 @@ enum vga_color {
 };
 
 void vga_set_color(uint8_t fg, uint8_t bg);
-void vga_putchar(char c);
+void vga_putchar(char c); 
 void vga_print(const char* s);
+void vga_input(uint32_t tecla);
+void vga_pulaLinha(uint32_t tecla);
 
 #endif
