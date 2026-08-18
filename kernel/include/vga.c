@@ -16,7 +16,7 @@ void vga_putchar(char c) {
     vga[cursor++] = (current_color << 8) | c;
 
     if (cursor >= VGA_WIDTH * VGA_HEIGHT) {
-        cursor = 0; // simples por enquanto
+        cursor = 0; 
     }
 }
 
