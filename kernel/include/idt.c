@@ -81,7 +81,11 @@ const uint32_t CaixaAlta[128] = {
 'V','B','N','M','<','>','?',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',
 LEFT,UNKNOWN,RIGHT,'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,
 };
-
+uint8_t inb(uint16_t porta ){
+    uint8_t variavel;
+    __asm__ __volatile__("inb %1, %0" : "=a"(variavel) : "Nd"(porta));
+    return variavel;
+}
 void isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
 void isr1(void)  { vga_print("Debug");                           asm("hlt"); asm("cli"); }
 void isr2(void)  { vga_print("NMI");                             asm("hlt"); asm("cli"); }
@@ -110,8 +114,8 @@ void irq0(void)  { vga_print("IRQ0: Timer");        asm("hlt"); asm("cli"); }
 
 
 
-void irq1(uint32_t tecla) {
-    
+void irq1() {
+    uint8_t tecla = inb(0x60);
     int tamanho = sizeof(TeclaEspecial) / sizeof(TeclaEspecial[0]);
 
     for (int i = 0; i < tamanho; i++) {
@@ -135,10 +139,9 @@ void irq1(uint32_t tecla) {
         }
     }
     if(TeclaEspecialMomento == false){
-        if(tecla == 1){
         uint32_t x = CaixaMomento[tecla];
         vga_uint32(x);
-    }
+    
     }
     
 }

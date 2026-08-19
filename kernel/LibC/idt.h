@@ -36,7 +36,7 @@ void isr21(void);  // #CP  Control Protection Exception
 
 // IRQs (vetor = IRQ + 32)
 void irq0(void);   // Timer
-void irq1(uint32_t tecla);   // Teclado
+void irq1();   // Teclado
 void irq2(void);   // Cascade
 void irq3(void);   // COM2
 void irq4(void);   // COM1
