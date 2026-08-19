@@ -1,12 +1,12 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 //Arquivo header agregador
-#include "include/vga.h"
-#include "LibC/stdlib.h"
-#include "include/idt.h" 
-#include "LibC/stdbool.h"
-#include "LibC/utypes.h"
-#include "LibC/math.h"
-#include "LibC/stdio.h"
+#include <vga.h>
+#include <stdlib.h>
+#include <idt.h> 
+#include <stdbool.h>
+#include <utypes.h>
+#include <math.h>
+#include <stdio.h>
 
 #endif

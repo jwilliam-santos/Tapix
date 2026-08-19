@@ -3,7 +3,7 @@ CC = gcc
 SRC_DIR = kernel
 BUILD_DIR = build
 ISO_DIR = iso
-
+INC_DIR = kernel/LibC
 C_SOURCES := $(shell find $(SRC_DIR) -name "*.c")
 C_OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(C_SOURCES))
 
@@ -25,7 +25,7 @@ $(BUILD_DIR)/kernel_entry.o: $(SRC_DIR)/kernel_entry.asm always
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c always
 	mkdir -p $(dir $@)
-	$(CC) -m64 -ffreestanding -fno-stack-protector -nostdlib -c $< -o $@
+		$(CC) -m64 -ffreestanding -fno-stack-protector -I$(INC_DIR) -nostdlib -c $< -o $@
 
 always:
 	mkdir -p $(BUILD_DIR)

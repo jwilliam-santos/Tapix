@@ -1,9 +1,9 @@
 #ifndef IDT_H
 #define IDT_H
 
-#include "../LibC/utypes.h"
-#include "vga.h"
-#include "../LibC/stdbool.h"
+#include <utypes.h>
+#include <vga.h>
+#include <stdbool.h>
 
 extern void load_IDT();
 extern void set_idt_entry(void *isr, uint8_t flags, uint8_t index);
