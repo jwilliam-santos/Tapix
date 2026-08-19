@@ -2,6 +2,7 @@
 
 
 bool capsOn;
+bool TeclaEspecialMomento = false;
 bool capsLock;
 //Codigo Teclas Especiais em hexadecimal
 const uint32_t UNKNOWN = 0x00;       
@@ -80,6 +81,7 @@ const uint32_t CaixaAlta[128] = {
 'V','B','N','M','<','>','?',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',
 LEFT,UNKNOWN,RIGHT,'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,
 };
+
 void isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
 void isr1(void)  { vga_print("Debug");                           asm("hlt"); asm("cli"); }
 void isr2(void)  { vga_print("NMI");                             asm("hlt"); asm("cli"); }
@@ -108,15 +110,16 @@ void irq0(void)  { vga_print("IRQ0: Timer");        asm("hlt"); asm("cli"); }
 
 
 
-int irq1(uint32_t tecla) {
+void irq1(uint32_t tecla) {
     
     int tamanho = sizeof(TeclaEspecial) / sizeof(TeclaEspecial[0]);
 
     for (int i = 0; i < tamanho; i++) {
        
         if (TeclaEspecial[i] == tecla && TeclaEspecial[i] != UNKNOWN) {
-            return 0;
-            if(irq1(tecla)){
+            TeclaEspecialMomento = true;
+            if(TeclaEspecialMomento == true){
+                if(tecla){
                 if(tecla == ENTER){
 
                 }
@@ -127,12 +130,17 @@ int irq1(uint32_t tecla) {
                     
                 }
             } 
+            }
+            
         }
     }
-    return 1; 
-    if(irq1(tecla) == 1){
-        vga_input(tecla);
+    if(TeclaEspecialMomento == false){
+        if(tecla == 1){
+        uint32_t x = CaixaMomento[tecla];
+        vga_uint32(x);
     }
+    }
+    
 }
 
 

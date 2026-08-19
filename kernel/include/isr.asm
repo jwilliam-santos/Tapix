@@ -65,7 +65,7 @@ ir0:
     call isr20
     call isr21
     call irq0
-    call irq1
+    call irq1 ;func do teclado
     call irq2
     call irq3
     call irq4
