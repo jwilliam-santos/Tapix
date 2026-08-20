@@ -26,7 +26,7 @@ void vga_print(const char* s) {
     }
 }
 
-void vga_uint32(uint8_t tecla){
+void vga_uint32(uint32_t tecla){
     uint16_t caractere_vga = ((current_color & 0xFF) << 8) | (tecla & 0xFF);
     
     vga[cursor++] = caractere_vga;

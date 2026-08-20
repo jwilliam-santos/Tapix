@@ -1,7 +1,9 @@
 ;Arquivo para a Irq1 (e posteriores)
-global irq1
+global irq1asm
+extern 
+irq1asm:
 
-irq1:
-    in  al, 0x60 
 
-    ret
+    
+
+

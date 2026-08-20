@@ -86,6 +86,7 @@ uint8_t inb(uint16_t porta ){
     __asm__ __volatile__("inb %1, %0" : "=a"(variavel) : "Nd"(porta));
     return variavel;
 }
+vga_set_color(VGA_LIGHT_RED,VGA_BLUE);//Cor dos erros
 void isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
 void isr1(void)  { vga_print("Debug");                           asm("hlt"); asm("cli"); }
 void isr2(void)  { vga_print("NMI");                             asm("hlt"); asm("cli"); }
@@ -108,11 +109,8 @@ void isr18(void) { vga_print("Machine Check");                   asm("hlt"); asm
 void isr19(void) { vga_print("SIMD FP Exception");               asm("hlt"); asm("cli"); }
 void isr20(void) { vga_print("Virtualization Exception");        asm("hlt"); asm("cli"); }
 void isr21(void) { vga_print("Control Protection Exception");    asm("hlt"); asm("cli"); }
-
 void irq0(void)  { vga_print("IRQ0: Timer");        asm("hlt"); asm("cli"); }
-
-
-
+vga_set_color(VGA_LIGHT_RED,VGA_BLACK);
 
 void irq1() {
     uint8_t tecla = inb(0x60);
