@@ -11,6 +11,8 @@ void kernel_main(void)
     // vga_print(itoa((unsigned long)ptr)); //MOSTRA VALOR onde kernel termina
     vga_set_color(VGA_LIGHT_RED,VGA_BLACK);
    
-    while(1);
+    while(1){
+        
+    }
     
 }
