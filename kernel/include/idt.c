@@ -109,6 +109,8 @@ extern void isr18(void) { vga_print("Machine Check");                   asm("hlt
 extern void isr19(void) { vga_print("SIMD FP Exception");               asm("hlt"); asm("cli"); }
 extern void isr20(void) { vga_print("Virtualization Exception");        asm("hlt"); asm("cli"); }
 extern void isr21(void) { vga_print("Control Protection Exception");    asm("hlt"); asm("cli"); }
+
+//IRQS
 extern void irq0(void)  { vga_print("IRQ0: Timer");        asm("hlt"); asm("cli"); }
 
 extern void irq1() {
