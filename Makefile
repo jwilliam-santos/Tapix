@@ -36,3 +36,5 @@ run: iso
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -f $(ISO_DIR)/boot/kernel.bin
+help:
+	printf "Comandos: make clean,make run\n"
