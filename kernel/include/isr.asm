@@ -37,7 +37,29 @@ extern irq12
 extern irq13
 extern irq14
 extern irq15
-global ir0
+global isr0asm
+global isr1asm
+global isr2asm
+global isr3asm
+global isr4asm
+global isr5asm
+global isr6asm
+global isr7asm
+global isr8asm
+global isr9asm
+global isr10asm
+global isr11asm
+global isr12asm
+global isr13asm
+global isr14asm
+global isr15asm
+global isr16asm
+global isr17asm
+global isr18asm
+global isr19asm
+global isr20asm
+global isr21asm
+global irq1asm
 
 %macro  pushad 0 ;macro func pushad em 64bits
     push rax
@@ -78,125 +100,125 @@ isr0asm:
     pushad
     call isr0
     popad
-    iret
+    iretq
 isr1asm:
     pushad 
     call isr1
     popad
-    iret
+    iretq
 isr2asm:
     pushad
     call isr2
     popad
-    iret
+    iretq
 isr3asm:
     pushad
     call isr3
     popad
-    iret
+    iretq
 isr4asm:
     pushad
     call isr4
     popad
-    iret
+    iretq
 isr5asm:
     pushad
     call isr5
     popad
-    iret
+    iretq
 isr6asm:
     pushad
     call isr6
     popad
-    iret
+    iretq
 isr7asm:
     pushad
     call isr7
     popad
-    iret
+    iretq
 isr8asm:
     pushad
     call isr8
     popad
-    iret
+    iretq
 isr9asm:
     pushad
     call isr9
     popad
-    iret
+    iretq
 isr10asm:
     pushad
     call isr10
     popad
-    iret
+    iretq
 isr11asm:
     pushad
     call isr11
     popad
-    iret
+    iretq
 isr12asm:
     pushad
     call isr12
     popad
-    iret
+    iretq
 isr13asm:
     pushad
     call isr13
     popad
-    iret
+    iretq
 isr14asm:
     pushad
     call isr14
     popad
-    iret 
+    iretq
 isr15asm:
     pushad
     call isr15
     popad
-    iret
+    iretq
 isr16asm:
     pushad
     call isr16
     popad
-    iret
+    iretq
 isr17asm:
     pushad
     call isr17
     popad
-    iret    
+    iretq   
 isr18asm:
     pushad
     call isr18
     popad
-    iret
+    iretq
 isr19asm:
     pushad
     call isr19
     popad
-    iret
+    iretq
 isr20asm:
     pushad
     call isr20
     popad
-    iret
+    iretq
 isr21asm:
     pushad
     call isr21
     popad
-    iret
+    iretq
 irq1asm:;func teclado
     pushad ; salva register
     in al, 0x60
 
-    movzx eax, al       
-    push rax
+    
+    movzx rdi,al
 
-    mov al, 0x20
     call irq1
-    add rsp, 8  ;limpa pilha
+    mov al, 0x20
+
     out 0x20, al ;Eoi Pic
     popad ;pusha resister
-    iret
+    iretq
 
     ;Irq a Fazer    
     ;irq2

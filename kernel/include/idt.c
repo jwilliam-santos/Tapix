@@ -87,13 +87,13 @@ uint8_t inb(uint16_t porta ){
     return variavel;
 }
 
-extern isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
+extern void isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
 extern void isr1(void)  { vga_print("Debug");                           asm("hlt"); asm("cli"); }
 extern void isr2(void)  { vga_print("NMI");                             asm("hlt"); asm("cli"); }
 extern void isr3(void)  { vga_print("Breakpoint");                      asm("hlt"); asm("cli"); }
 extern void isr4(void)  { vga_print("Overflow");                        asm("hlt"); asm("cli"); }
 extern void isr5(void)  { vga_print("Bound Range Exceeded");            asm("hlt"); asm("cli"); }
-extern isr6(void)  { vga_print("Invalid Opcode");                  asm("hlt"); asm("cli"); }
+extern void isr6(void)  { vga_print("Invalid Opcode");                  asm("hlt"); asm("cli"); }
 extern void isr7(void)  { vga_print("Device Not Available");            asm("hlt"); asm("cli"); }
 extern void isr8(void)  { vga_print("Double Fault");                    asm("hlt"); asm("cli"); }
 extern void isr9(void)  { vga_print("Coprocessor Segment Overrun");     asm("hlt"); asm("cli"); }

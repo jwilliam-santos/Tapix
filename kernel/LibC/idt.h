@@ -8,31 +8,31 @@
 extern void load_IDT();
 extern void set_idt_entry(void *isr, uint8_t flags, uint8_t index);
 
-extern void ir0();
+
 
 // Exceções da CPU
-void isr0(void);   // #DE  Division Error
-void isr1(void);   // #DB  Debug
-void isr2(void);   // NMI  Non-Maskable Interrupt
-void isr3(void);   // #BP  Breakpoint
-void isr4(void);   // #OF  Overflow
-void isr5(void);   // #BR  Bound Range Exceeded
-void isr6(void);   // #UD  Invalid Opcode
-void isr7(void);   // #NM  Device Not Available
-void isr8(void);   // #DF  Double Fault
-void isr9(void);   // Coprocessor Segment Overrun (obsoleto)
-void isr10(void);  // #TS  Invalid TSS
-void isr11(void);  // #NP  Segment Not Present
-void isr12(void);  // #SS  Stack-Segment Fault
-void isr13(void);  // #GP  General Protection Fault
-void isr14(void);  // #PF  Page Fault
-void isr15(void);  // Reserved
-void isr16(void);  // #MF  x87 FP Exception
-void isr17(void);  // #AC  Alignment Check
-void isr18(void);  // #MC  Machine Check
-void isr19(void);  // #XM  SIMD FP Exception
-void isr20(void);  // #VE  Virtualization Exception
-void isr21(void);  // #CP  Control Protection Exception
+extern void isr0(void);   // #DE  Division Error
+extern void isr1(void);   // #DB  Debug
+extern void isr2(void);   // NMI  Non-Maskable Interrupt
+extern void isr3(void);   // #BP  Breakpoint
+extern void isr4(void);   // #OF  Overflow
+extern void isr5(void);   // #BR  Bound Range Exceeded
+extern void isr6(void);   // #UD  Invalid Opcode
+extern void isr7(void);   // #NM  Device Not Available
+extern void isr8(void);   // #DF  Double Fault
+extern void isr9(void);   // Coprocessor Segment Overrun (obsoleto)
+extern void isr10(void);  // #TS  Invalid TSS
+extern void isr11(void);  // #NP  Segment Not Present
+extern void isr12(void);  // #SS  Stack-Segment Fault
+extern void isr13(void);  // #GP  General Protection Fault
+extern void isr14(void);  // #PF  Page Fault
+extern void isr15(void);  // Reserved
+extern void isr16(void);  // #MF  x87 FP Exception
+extern void isr17(void);  // #AC  Alignment Check
+extern void isr18(void);  // #MC  Machine Check
+extern void isr19(void);  // #XM  SIMD FP Exception
+extern void isr20(void);  // #VE  Virtualization Exception
+extern void isr21(void);  // #CP  Control Protection Exception
 
 // IRQs (vetor = IRQ + 32)
 void irq0(void);   // Timer
