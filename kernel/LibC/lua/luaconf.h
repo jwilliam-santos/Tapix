@@ -641,7 +641,7 @@
 ** macro must include the header 'locale.h'.)
 */
 #if !defined(lua_getlocaledecpoint)
-#define lua_getlocaledecpoint()		(localeconv()->decimal_point[0])
+#define lua_getlocaledecpoint()		('.')
 #endif
 
 
