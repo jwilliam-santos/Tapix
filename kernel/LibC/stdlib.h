@@ -7,6 +7,6 @@ void  free(void* ptr);
 void* malloc(size_t size);
 void* realloc(void* ptr, size_t size);//feito posteriomente
 char* itoa(unsigned long num);
-
+int abs(int j);
 
 #endif

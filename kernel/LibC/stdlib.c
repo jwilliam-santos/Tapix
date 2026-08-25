@@ -23,6 +23,7 @@ char* itoa(unsigned long num){
 
 static char* heap = (char*)&kernel_end;
 void* malloc(size_t size){
+    if(size == 0) return NULL;
     void* endereco = heap;
     heap += sizeof(struct header) + size;
     return endereco;
@@ -54,3 +55,11 @@ void free(void* ptr){
 //     }
     
 // }
+int abs(int j){
+    if (j < 0){
+        return -j;
+    }
+    if (j >= 0){
+        return j;
+    }
+}
