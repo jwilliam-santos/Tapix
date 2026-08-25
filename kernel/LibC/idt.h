@@ -5,7 +5,7 @@
 #include <vga.h>
 #include <stdbool.h>
 
-extern void load_IDT();
+extern void load_IDT(void);
 extern void set_idt_entry(void *isr, uint8_t flags, uint8_t index);
 void set_idt(int vector, void *isr_handler, uint16_t selector, uint8_t flags, uint8_t ist);
 
