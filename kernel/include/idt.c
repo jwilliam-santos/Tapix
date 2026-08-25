@@ -87,6 +87,38 @@ uint8_t inb(uint16_t porta ){
     return variavel;
 }
 
+/*Estrutura do Descritor 64bits 
+* De "https://wiki.osdev.org/Interrupt_Descriptor_Table#Structure_on_x86-64"
+*/
+typedef struct {
+    uint16_t offset_1;
+    uint16_t selector;
+    uint8_t  ist;
+    uint8_t  type_attributes;
+    uint16_t offset_2;
+    uint32_t offset_3;
+    uint32_t zero;
+} __attribute__((packed)) idt_entry_t;
+idt_entry_t idt[256];
+
+void set_idt(int vector, void *isr_handler, uint16_t selector, uint8_t flags, uint8_t ist) // Creditos da func  á "doraibu"
+{
+    uint64_t handler_addr = (uint64_t)isr_handler;
+    
+    idt[vector].offset_1 = (uint16_t)(handler_addr & 0xFFFF);
+    idt[vector].selector = selector;
+    idt[vector].ist = ist & 0x07;
+    idt[vector].type_attributes = flags;
+    idt[vector].offset_2 = (uint16_t)((handler_addr >> 16) & 0xFFFF);
+    idt[vector].offset_3 = (uint32_t)(handler_addr >> 32);
+    idt[vector].zero = 0;
+}
+
+
+
+
+
+
 extern void isr0(void)  { vga_print("Division Error");                  asm("hlt"); asm("cli"); }
 extern void isr1(void)  { vga_print("Debug");                           asm("hlt"); asm("cli"); }
 extern void isr2(void)  { vga_print("NMI");                             asm("hlt"); asm("cli"); }
