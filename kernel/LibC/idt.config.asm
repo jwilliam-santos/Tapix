@@ -1,10 +1,13 @@
 [BITS 64]
-ALIGN 8
+section .idt ;Sessao da Idt
+global __idt_start__
+__idt_start__:;alocar Idt no Asm
+    times 256 * 16 db 0
 
-extern __idt_start__
-
+section .text ; sessao do texto
 global load_IDT
-global set_idt_entry
+
+ALIGN 8
 
 KERNEL_CS equ 0x08
 

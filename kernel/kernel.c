@@ -23,7 +23,7 @@ void kernel_main(void)
     set_idt(7,isr7,0x08,0x8E,0);
     set_idt(8,isr8,0x08,0x8E,1);
     set_idt(9,isr9,0x08,0x8E,0);
-    set_idt(10,isr10,0x08,0x8,0);
+    set_idt(10,isr10,0x08,0x8e,0);
     set_idt(11,isr11,0x08,0x8e,0);
     set_idt(12,isr12,0x08,0x8e,0);
     set_idt(13,isr13,0x08,0x8e,0);
@@ -37,12 +37,11 @@ void kernel_main(void)
     set_idt(21,isr21,0x08,0x8e,0);
 
     load_IDT();
+    volatile int a = 10;
+    volatile int b = 0;
+    int c = a/b;
     while(1){
-        volatile int a = 10;
-        volatile int b = 0;
-
-        int c = a / b;
-
+      
     }
     
 }

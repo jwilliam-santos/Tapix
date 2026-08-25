@@ -9,7 +9,12 @@ SECTIONS
         *(.multiboot)
         *(.text)
     }
-
+    .idt :
+{
+    __idt_start__ = .;
+    KEEP(*(.idt))
+    . += 256 * 16;
+}
     .rodata :
     {
         *(.rodata)
@@ -26,4 +31,5 @@ SECTIONS
         *(.bss)
     }
     kernel_end = .;
+    
 }
