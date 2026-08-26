@@ -4,6 +4,7 @@ SRC_DIR = kernel
 BUILD_DIR = build
 ISO_DIR = iso
 INC_DIR = kernel/LibC
+log = qemu.log
 
 C_SOURCES := $(shell find $(SRC_DIR) -name "*.c")
 C_OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(C_SOURCES))
@@ -36,11 +37,13 @@ always:
 	mkdir -p $(BUILD_DIR)
 
 run: iso
-	qemu-system-x86_64 -cdrom $(BUILD_DIR)/Tapix.iso -d int,cpu_reset
+	qemu-system-x86_64 -cdrom $(BUILD_DIR)/Tapix.iso -d int,cpu_reset -D qemu.log -no-reboot -no-shutdown
+
+
 
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -f $(ISO_DIR)/boot/kernel.bin
-
+	rm -f $(log)
 help:
 	printf "Comandos: make clean,make run\n"
