@@ -8,5 +8,7 @@
 #include <utypes.h>
 #include <math.h>
 #include <stdio.h>
+#include <iso646.h>
+#include <limits.h>
 
 #endif
