@@ -17,8 +17,6 @@ load_IDT:
     sti
     ret
 
-idtr:
-    dw 256 * 16 - 1
-    dq __idt_start__
+
 
 section .note.GNU-stack noalloc noexec nowrite progbits
