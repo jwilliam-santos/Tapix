@@ -34,6 +34,31 @@ extern void isr19(void);  // #XM  SIMD FP Exception
 extern void isr20(void);  // #VE  Virtualization Exception
 extern void isr21(void);  // #CP  Control Protection Exception
 
+//ISR Asm
+
+extern void isr0asm(void);
+extern void isr1asm(void);
+extern void isr2asm(void);
+extern void isr3asm(void);
+extern void isr4asm(void);
+extern void isr5asm(void);
+extern void isr6asm(void);
+extern void isr7asm(void);
+extern void isr8asm(void);
+extern void isr9asm(void);
+extern void isr10asm(void);
+extern void isr11asm(void);
+extern void isr12asm(void);
+extern void isr13asm(void);
+extern void isr14asm(void);
+extern void isr15asm(void);
+extern void isr16asm(void);
+extern void isr17asm(void);
+extern void isr18asm(void);
+extern void isr19asm(void);
+extern void isr20asm(void);
+extern void isr21asm(void);
+
 // IRQs (vetor = IRQ + 32)
 void irq0(void);   // Timer
 void irq1();   // Teclado

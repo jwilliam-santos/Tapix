@@ -1,18 +1,9 @@
 //Func Principal do Kernel
 #include "kernel.h"
 
+void ISRs(void){
 
 
-void kernel_main(void)
-{
-    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
-    vga_print(">");
-   
-
-    // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina
-    vga_set_color(VGA_LIGHT_RED,VGA_BLACK);
-
-    /*ISRs 1 -> 21*/
     set_idt(0,isr0,0x08,0x8E,0);
     set_idt(1,isr1,0x08,0x8E,0);
     set_idt(2,isr2,0x08,0x8E,0);
@@ -35,11 +26,25 @@ void kernel_main(void)
     set_idt(19,isr19,0x08,0x8e,0);
     set_idt(20,isr20,0x08,0x8e,0);
     set_idt(21,isr21,0x08,0x8e,0);
+}
+
+
+void kernel_main(void)
+{
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_print(">");
+   
+
+    // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina
+    vga_set_color(VGA_LIGHT_RED,VGA_BLACK);
+
+    /*ISRs 1 -> 21*/
+
 
     load_IDT();
-    volatile int a = 10;
-    volatile int b = 0;
-    int c = a/b;
+    // volatile int a = 10;
+    // volatile int b = 0;
+    // int c = a/b;
     while(1){
       
     }
