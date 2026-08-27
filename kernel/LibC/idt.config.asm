@@ -13,7 +13,7 @@ KERNEL_CS equ 0x08
 
 ; void load_IDT(void);
 load_IDT:
-    lidt [rel idtr]
+
     sti
     ret
 
