@@ -62,6 +62,7 @@ global isr21asm
 global irq1asm
 
 %macro  pushad 0 ;macro func pushad em 64bits
+
     push rax
     push rbx
     push rcx
@@ -95,6 +96,7 @@ global irq1asm
     pop rcx
     pop rbx
     pop rax
+
 %endmacro
 isr0asm:
     pushad
@@ -140,6 +142,7 @@ isr8asm:
     pushad
     call isr8
     popad
+    add rsp,8
     iretq
 isr9asm:
     pushad
@@ -150,26 +153,31 @@ isr10asm:
     pushad
     call isr10
     popad
+    add rsp,8
     iretq
 isr11asm:
     pushad
     call isr11
     popad
+    add rsp,8
     iretq
 isr12asm:
     pushad
     call isr12
     popad
+    add rsp,8
     iretq
 isr13asm:
     pushad
     call isr13
     popad
+    add rsp,8
     iretq
 isr14asm:
     pushad
     call isr14
     popad
+    add rsp,8
     iretq
 isr15asm:
     pushad
