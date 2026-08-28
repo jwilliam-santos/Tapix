@@ -1,10 +1,10 @@
 [BITS 64]
-section .idt ;Sessao da Idt
-global __idt_start__
-__idt_start__:;alocar Idt no Asm
-    times 256 * 16 db 0
 
-section .text ; sessao do texto
+section .text
+global load_IDT
+extern idt
+
+
 global load_IDT
 
 ALIGN 8
@@ -13,10 +13,12 @@ KERNEL_CS equ 0x08
 
 ; void load_IDT(void);
 load_IDT:
-
+    lidt [rel idtr]
     sti
     ret
-
+idtr:
+    dw 256*16 -1
+    dq idt 
 
 
 section .note.GNU-stack noalloc noexec nowrite progbits
