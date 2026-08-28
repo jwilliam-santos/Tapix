@@ -131,7 +131,7 @@ extern void isr8(void)  { vga_print("Double Fault");                    asm("hlt
 extern void isr9(void)  { vga_print("Coprocessor Segment Overrun");     asm("hlt"); asm("cli"); }
 extern void isr10(void) { vga_print("Invalid TSS");                     asm("hlt"); asm("cli"); }
 extern void isr11(void) { vga_print("Segment Not Present");             asm("hlt"); asm("cli"); }
-extern void isr12(void) { vga_print("Stack-Segment Fault");             asm("hlt"); asm("cli"); }
+extern void isr12(void) { vga_print("Stack-Segment Fault");             asm("hlt"); asm("cli"); } /*Corrigir erro nessa Isr*/
 extern void isr13(void) { vga_print("General Protection Fault");        asm("hlt"); asm("cli"); }
 extern void isr14(void) { vga_print("Page Fault");                      asm("hlt"); asm("cli"); }
 extern void isr15(void) { vga_print("Reserved");                        asm("hlt"); asm("cli"); }

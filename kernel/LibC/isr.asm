@@ -22,7 +22,7 @@ extern isr19
 extern isr20
 extern isr21
 extern irq0
-extern irq1
+extern keyboard
 extern irq2
 extern irq3
 extern irq4
@@ -213,7 +213,7 @@ irq1asm:;func teclado
     
     movzx rdi,al
 
-    call irq1
+    call keyboard
     mov al, 0x20
 
     out 0x20, al ;Eoi Pic
