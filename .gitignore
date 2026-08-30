@@ -3,3 +3,4 @@
 *.log
 build/
 Logs/
+compile_commands.json
