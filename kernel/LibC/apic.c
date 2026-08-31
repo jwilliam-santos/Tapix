@@ -27,7 +27,7 @@ void pic_disable(void) {
 
 
 void Geral_apic(void){
-  /*Geral Apic Code*/
+  /*Apic Code*/
   pic_disable();
   asm("sti");
 }
