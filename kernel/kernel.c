@@ -12,7 +12,7 @@ void ISRs(void){
     set_idt(5,isr5asm,0x08,0x8E,0);
     set_idt(6,isr6asm,0x08,0x8E,0);
     set_idt(7,isr7asm,0x08,0x8E,0);
-    set_idt(8,isr8asm,0x08,0x8E,1);
+    set_idt(8,isr8asm,0x08,0x8E,0);
     set_idt(9,isr9asm,0x08,0x8E,0);
     set_idt(10,isr10asm,0x08,0x8e,0);
     set_idt(11,isr11asm,0x08,0x8e,0);
@@ -50,5 +50,4 @@ void kernel_main(void)
       
     }
     
-}
- 
+} 
