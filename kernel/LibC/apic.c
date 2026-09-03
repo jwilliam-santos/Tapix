@@ -21,7 +21,6 @@ void pic_disable(void) {
   outb(PIC2_DATA, 0xff);
   /*Remap vector icw1 -> icw4*/
 
-  
 }
 
 
