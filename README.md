@@ -13,7 +13,7 @@ Tapix/
     ├── kernel.c
     ├── kernel.h
     ├── kernel_entry.asm
-    └── LibC/
+    └── libc/
         └── Minimal libc
 ```
 ## Technologies
