@@ -42,6 +42,7 @@ void kernel_main(void)
 
     ISRs();
     load_IDT();
+    Geral_apic();
     asm("sti");
     // volatile int a = 10;
     // volatile int b = 0;

@@ -15,7 +15,6 @@ void pic_disable(void) {
    *
    * do func outb to do outb in master and slave pin  (MasterPIC,0xff),
    * (SlavePic,0xff)
-   *
    * */
   outb(PIC1_DATA, 0xff);
   outb(PIC2_DATA, 0xff);
