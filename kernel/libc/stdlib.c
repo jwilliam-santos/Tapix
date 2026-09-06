@@ -44,6 +44,7 @@ void free(void* ptr){
     }
     struct header* h = (struct header*)ptr - 1;
     h->livre = 1;
+    
 }
  void* realloc(void* ptr, size_t size){
      if(ptr == NULL){

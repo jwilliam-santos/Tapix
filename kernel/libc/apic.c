@@ -76,6 +76,7 @@ enum {
     CPUID_FEAT_EDX_PBE                = 1 << 31
 };
 
+/*Falta -> func cpuSetMSR, write_reg, ReadRegister*/
 static inline void cpuid(int code, uint32_t *a, uint32_t *d) {
   asm volatile("cpuid":"=a"(*a),"=d"(*d):"a"(code):"ecx","ebx");
 }
@@ -86,6 +87,8 @@ static int check_apic(void)
    cpuid(1, &eax, &edx);
    return edx & CPUID_FEAT_EDX_APIC;;
 }
+
+
 static inline void outb(unsigned short port, unsigned char val) {
   __asm__ __volatile__("outb %0, %1" : : "a"(val), "Nd"(port));
 }
@@ -118,10 +121,41 @@ void Mask_pic(uint8_t IRQline){
 }
 
 
+void cpu_set_apic_base(uintptr_t apic) {
+   uint32_t edx = 0;
+   uint32_t eax = (apic & 0xfffff0000) | IA32_APIC_BASE_MSR_ENABLE;
+
+#ifdef __PHYSICAL_MEMORY_EXTENSION__
+   edx = (apic >> 32) & 0x0f;
+#endif
+
+   cpuSetMSR(IA32_APIC_BASE_MSR, eax, edx);
+}
+uintptr_t cpu_get_apic_base() {
+   uint32_t eax, edx;
+   cpuGetMSR(IA32_APIC_BASE_MSR, &eax, &edx);
+
+#ifdef __PHYSICAL_MEMORY_EXTENSION__
+   return (eax & 0xfffff000) | ((edx & 0x0f) << 32);
+#else
+   return (eax & 0xfffff000);
+#endif
+}
+
+
+
+void enable_apic(void){
+    cpu_set_apic_base(cpu_get_apic_base());
+
+    write_reg(0xF0, ReadRegister(0xF0) | 0x100);
+
+}
+
 
 void Geral_apic(void){
   /*Apic Geral Code*/
   pic_disable();
   Mask_pic(1);
+  enable_apic();
   asm("sti");
 }
