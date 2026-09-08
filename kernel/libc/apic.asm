@@ -1,7 +1,7 @@
 global cpuSetMSR
 global ReadRegister
 global write_reg
-
+global cpuGetMSR
 
 cpuSetMSR:
     ;parametro 1 chega em rdi
@@ -11,7 +11,13 @@ cpuSetMSR:
     mov eax,esi
     wrmsr
     ret
-
+cpuGetMSR:
+    mov ecx,edi
+    
+    rdmsr
+    shl edx,cl
+    
+    ret
 Readgister:
     
 
