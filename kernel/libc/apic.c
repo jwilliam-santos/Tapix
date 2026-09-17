@@ -152,7 +152,7 @@ void enable_apic(void){
 }
 
 
-void Geral_apic(void){
+void geral_apic(void){
   /*Apic Geral Code*/
   pic_disable();
   Mask_pic(1);

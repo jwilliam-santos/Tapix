@@ -1,6 +1,6 @@
 //Func Principal do Kernel
 #include "kernel.h"
-
+#include <apic.h>
 void ISRs(void){
 
 
@@ -42,7 +42,7 @@ void kernel_main(void)
 
     ISRs();
     load_IDT();
-    Geral_apic();
+    geral_apic();
     asm("sti");
     // volatile int a = 10;
     // volatile int b = 0;

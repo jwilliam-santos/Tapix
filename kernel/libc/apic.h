@@ -15,7 +15,7 @@
 #define PIC2_COMMAND PIC2
 #define PIC2_DATA (PIC2 + 1)
 void pic_disable(void);
-void Geral_apic(void);
+void geral_apic(void);
 void Mask_pic(uint8_t IRQline);
 
 #endif
