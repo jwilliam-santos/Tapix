@@ -22,7 +22,7 @@ iso: kernel
 
 kernel: always $(ASM_OBJECTS) $(C_OBJECTS)
 	$(CC) -m64 -ffreestanding -nostdlib -no-pie -T linker.ld \
-		$(ASM_OBJECTS) $(C_OBJECTS) \
+		$(BUILD_DIR)/kernel_entry.o $(sort $(filter-out $(BUILD_DIR)/kernel_entry.o, $(ASM_OBJECTS) $(C_OBJECTS))) \
 		-o $(BUILD_DIR)/kernel.bin
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.asm always
