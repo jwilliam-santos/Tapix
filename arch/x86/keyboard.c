@@ -42,85 +42,35 @@ const uint32_t NONE = 0x00;
 const uint32_t ALTGR = 0x38;        
 const uint32_t NUMLCK = 0x45;       
 
-const uint32_t ENTER = 0x1C;        
-const uint32_t BACKSPACE = 0x0E;
-const uint32_t SPACE   = 0x39;
-const uint32_t TAB = 0x0D;
-
-const uint32_t CaixaBaixa[128] = {
-UNKNOWN,ESC,'1','2','3','4','5','6','7','8',
-'9','0','-','=','\b','\t','q','w','e','r',
-'t','y','u','i','o','p','[',']','\n',CTRL,
-'a','s','d','f','g','h','j','k','l',';',
-'\'','`',LSHFT,'\\','z','x','c','v','b','n','m',',',
-'.','/',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',LEFT,UNKNOWN,RIGHT,
-'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,UNKNOWN
-};
-
-uint32_t CaixaMomento[128] = {
-UNKNOWN,ESC,'1','2','3','4','5','6','7','8',
-'9','0','-','=','\b','\t','q','w','e','r',
-'t','y','u','i','o','p','[',']','\n',CTRL,
-'a','s','d','f','g','h','j','k','l',';',
-'\'','`',LSHFT,'\\','z','x','c','v','b','n','m',',',
-'.','/',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',LEFT,UNKNOWN,RIGHT,
-'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,UNKNOWN
-};
-uint32_t TeclaEspecial[128]= {
-    UNKNOWN, ESC, CTRL, LSHFT, RSHFT, ALT, 
-    F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, 
-    SCRLCK, HOME, UP, LEFT, RIGHT, DOWN, PGUP, PGDOWN, END, INS, DEL, 
-    CAPS, NONE, ALTGR, NUMLCK, 
-    ENTER, BACKSPACE, SPACE, TAB
-
-};
-
- uint32_t CaixaAlta[128] = {
-    UNKNOWN,ESC,'!','@','#','$','%','^','&','*','(',')','_','+','\b','\t','Q','W','E','R',
-'T','Y','U','I','O','P','{','}','\n',CTRL,'A','S','D','F','G','H','J','K','L',':','"','~',LSHFT,'|','Z','X','C',
-'V','B','N','M','<','>','?',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',
-LEFT,UNKNOWN,RIGHT,'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,
-};
-
-
-
-
+const uint32_t ENTER = 0x1C;  /*\n*/
+const uint32_t BACKSPACE = 0x0E; /*\b*/ 
+const uint32_t SPACE   = 0x39; 
+const uint32_t TAB = 0x0D; /*\t*/
+// Resto em Teclado.txt
 
 uint8_t inb(uint16_t porta ){
     uint8_t variavel;
     __asm__ __volatile__("inb %1, %0" : "=a"(variavel) : "Nd"(porta));
     return variavel;
 }
-
-
-extern void keyboard() {
-    uint8_t tecla = inb(0x60);
-    int tamanho = sizeof(TeclaEspecial) / sizeof(TeclaEspecial[0]);
-
-    for (int i = 0; i < tamanho; i++) {
-       
-        if (TeclaEspecial[i] == tecla && TeclaEspecial[i] != UNKNOWN) {
-            TeclaEspecialMomento = true;
-            if(TeclaEspecialMomento == true){
-                if(tecla){
-                if(tecla == ENTER){
-
-                }
-                if(tecla == LSHFT || tecla == RSHFT){
-
-                }
-                if(tecla == BACKSPACE){
-                    
-                }
-            } 
-            }
-            
-        }
-    }
-    if(TeclaEspecialMomento == false){
-        uint32_t x = CaixaMomento[tecla];
-        vga_uint32(x);
-    
-    }
-    
+static inline void outb(unsigned short port, unsigned char val) {
+  __asm__ __volatile__("outb %0, %1" : : "a"(val), "Nd"(port));
 }
+uint32_t LowKeyboard[256] = {
+    ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
+    '|','1','2','3','4','5','6','7','8','9','0',BACKSPACE,
+    TAB,'q','w','e','r','t','y','u','i','o','p','´','+','}',
+    CAPS,'a','s','d','f','g','h','j','k','l','ñ','{',ENTER,
+    LSHFT,'z','x','c','v','b','n','m',',','.','-',RSHFT,
+    CTRL,ALT,SPACE,ALTGR,
+};
+uint32_t HighKeyboard[256] = {
+    ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
+    '°','!','"','#','$','%','&','/','(',')','=','?','¡',BACKSPACE,
+    TAB,'Q','W','E','R','T','Y','U','I','O','P','¨','*',']',
+    CAPS,'A','S','D','F','G','H','J','K','L','Ñ','[',ENTER,
+    LSHFT,'Z','X','C','V','B','N','M',';',':','_',ENTER,
+    CTRL,ALT,SPACE,ALTGR
+};
+
+
