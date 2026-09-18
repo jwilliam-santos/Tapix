@@ -1,6 +1,7 @@
 //Func Principal do Kernel
 #include "kernel.h"
-#include <apic.h>
+volatile char last_key = 0;
+
 void ISRs(void){
 
 
@@ -26,6 +27,8 @@ void ISRs(void){
     set_idt(19,isr19asm,0x08,0x8e,0);
     set_idt(20,isr20asm,0x08,0x8e,0);
     set_idt(21,isr21asm,0x08,0x8e,0);
+    set_idt(1,irq1asm,0x8E,33,0);
+    
 }
 
 
@@ -46,7 +49,11 @@ void kernel_main(void)
     asm("sti");
 
     while(1){
-      
+      __asm__ volatile("hlt");
+        if (last_key != 0) {
+            vga_putchar(last_key);
+            last_key = 0;
     }
     
+    }
 } 

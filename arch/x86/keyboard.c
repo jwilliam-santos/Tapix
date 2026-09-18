@@ -1,9 +1,8 @@
 #include <keyboard.h>
+#include <stdint.h>
 
-
-bool capsOn;
-bool TeclaEspecialMomento = false;
-bool capsLock;
+bool Caps;
+extern volatile last_key;
 //Codigo Teclas Especiais em hexadecimal
 const uint32_t UNKNOWN = 0x00;       
 const uint32_t ESC     = 0x01;       
@@ -47,7 +46,11 @@ const uint32_t BACKSPACE = 0x0E; /*\b*/
 const uint32_t SPACE   = 0x39; 
 const uint32_t TAB = 0x0D; /*\t*/
 // Resto em Teclado.txt
-
+const uint32_t TeclasEspeciais[256] = {
+    UNKNOWN,ESC,CTRL,LSHFT,RSHFT,ALT,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
+    SCRLCK,HOME,UP,LEFT,RIGHT,DOWN,PGUP,PGDOWN,END,INS,DEL,CAPS,NONE,ALTGR,
+    NUMLCK,ENTER,BACKSPACE,TAB
+};
 uint8_t inb(uint16_t porta ){
     uint8_t variavel;
     __asm__ __volatile__("inb %1, %0" : "=a"(variavel) : "Nd"(porta));
@@ -56,7 +59,7 @@ uint8_t inb(uint16_t porta ){
 static inline void outb(unsigned short port, unsigned char val) {
   __asm__ __volatile__("outb %0, %1" : : "a"(val), "Nd"(port));
 }
-uint32_t LowKeyboard[256] = {
+uint8_t LowKeyboard[250] = {
     ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
     '|','1','2','3','4','5','6','7','8','9','0',BACKSPACE,
     TAB,'q','w','e','r','t','y','u','i','o','p','´','+','}',
@@ -64,7 +67,7 @@ uint32_t LowKeyboard[256] = {
     LSHFT,'z','x','c','v','b','n','m',',','.','-',RSHFT,
     CTRL,ALT,SPACE,ALTGR,
 };
-uint32_t HighKeyboard[256] = {
+uint8_t HighKeyboard[250] = {
     ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
     '°','!','"','#','$','%','&','/','(',')','=','?','¡',BACKSPACE,
     TAB,'Q','W','E','R','T','Y','U','I','O','P','¨','*',']',
@@ -72,5 +75,14 @@ uint32_t HighKeyboard[256] = {
     LSHFT,'Z','X','C','V','B','N','M',';',':','_',ENTER,
     CTRL,ALT,SPACE,ALTGR
 };
-
+uint8_t *tecladomomento = LowKeyboard;
+void keyboard(const unsigned char scancode) {
+    if (scancode < sizeof(tecladomomento)) {
+        char c = tecladomomento[scancode];
+        if (c != 0 && !(scancode & 0x80)) { // ignora key release (bit 7)
+            last_key = c;
+        }
+    }
+    outb(0x60,0x60);
+}
 
