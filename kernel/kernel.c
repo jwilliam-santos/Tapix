@@ -36,7 +36,7 @@ void kernel_main(void)
    
 
     // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina
-    vga_set_color(VGA_LIGHT_RED,VGA_BLACK);
+    vga_set_color(VGA_BLUE,VGA_BLACK);
 
     /*ISRs 1 -> 21*/
 
@@ -44,9 +44,7 @@ void kernel_main(void)
     load_IDT();
     geral_apic();
     asm("sti");
-    // volatile int a = 10;
-    // volatile int b = 0;
-    // int c = a/b;
+
     while(1){
       
     }
