@@ -1,7 +1,7 @@
 #ifndef IDT_H
 #define IDT_H
 
-#include <utypes.h>
+#include <stdint.h>
 #include <vga.h>
 #include <stdbool.h>
 

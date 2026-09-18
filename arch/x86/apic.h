@@ -1,12 +1,11 @@
 #ifndef APIC_H
 #define APIC_H
-#include <utypes.h>
+
 #define IA32_APIC_BASE_MSR 0x1B
 #define IA32_APIC_BASE_MSR_BSP 0x100 // Processor is a BSP
 #define IA32_APIC_BASE_MSR_ENABLE 0x800
-#include <idt.h>
-#include <stdbool.h>
-#include <stdlib.h>
+
+
 #include <stdint.h>
 #define PIC1 0x20
 #define PIC2 0xA0
