@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 #include <stdbool.h>
-#include <utypes.h>
+#include <stdint.h>
 #include <vga.h>
 
 
