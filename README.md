@@ -9,15 +9,16 @@ Tapix/
 ├── Makefile
 ├── README.MD
 ├── linker.ld
+└──arch
+|    └──x86
+|        └──x86 basic tools
 └── kernel/
     ├── kernel.c
     ├── kernel.h
     ├── kernel_entry.asm
     └── libc/
         └── Minimal libc
-└──arch
-    └──x86
-        └──x86 basic tools
+
 ```
 ## Technologies
 ```text
