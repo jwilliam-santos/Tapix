@@ -3,15 +3,18 @@ CC = gcc
 SRC_DIR = kernel
 BUILD_DIR = build
 ISO_DIR = iso
-INC_DIR = kernel/LibC
+INC_DIR = -Ikernel/libc -Iarch/x86
 log = qemu.log
 
-C_SOURCES := $(shell find $(SRC_DIR) -name "*.c")
-C_OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(C_SOURCES))
+C_SOURCES := $(shell find $(SRC_DIR) arch  -name "*.c")
+C_OBJECTS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(C_SOURCES))
 
-ASM_SOURCES := $(shell find $(SRC_DIR) -name "*.asm")
-ASM_OBJECTS := $(patsubst $(SRC_DIR)/%.asm, $(BUILD_DIR)/%.o, $(ASM_SOURCES))
+ASM_SOURCES := $(shell find $(SRC_DIR) arch -name "*.asm")
+ASM_OBJECTS := $(patsubst %.asm, $(BUILD_DIR)/%.o, $(ASM_SOURCES))
 
+
+ENTRY_OBJ := $(BUILD_DIR)/kernel/kernel_entry.o
+#Arquivo de entrada 
 .PHONY: all iso kernel clean always run
 
 all: iso
@@ -22,17 +25,18 @@ iso: kernel
 
 kernel: always $(ASM_OBJECTS) $(C_OBJECTS)
 	$(CC) -m64 -ffreestanding -nostdlib -no-pie -T linker.ld \
-		$(BUILD_DIR)/kernel_entry.o $(sort $(filter-out $(BUILD_DIR)/kernel_entry.o, $(ASM_OBJECTS) $(C_OBJECTS))) \
+		$(ENTRY_OBJ) $(sort $(filter-out $(ENTRY_OBJ), $(ASM_OBJECTS) $(C_OBJECTS))) \
 		-o $(BUILD_DIR)/kernel.bin
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.asm always
+$(BUILD_DIR)/%.o: %.asm always
 	mkdir -p $(dir $@)
 	$(ASM) $< -f elf64 -o $@
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c always
+$(BUILD_DIR)/%.o: %.c always
 	mkdir -p $(dir $@)
-	$(CC) -m64 -ffreestanding -fno-stack-protector -I$(INC_DIR) -nostdlib -c $< -o $@
-
+	$(CC) -m64 -ffreestanding -fno-stack-protector $(INC_DIR) -nostdlib -c $< -o $@ 
+	
+#Flag -I (da linha 34 includi os cabechalhos)
 always:
 	mkdir -p $(BUILD_DIR)
 
