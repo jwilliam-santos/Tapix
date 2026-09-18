@@ -59,7 +59,7 @@ global isr18asm
 global isr19asm
 global isr20asm
 global isr21asm
-global isr111asm
+global irq1asm
 
 %macro  pushad 0 ;macro func pushad em 64bits
 
@@ -214,7 +214,7 @@ isr21asm:
     call isr21
     popad
     iretq
-isr111asm:;func teclado
+irq1asm:;func teclado
     pushad ; salva register
     in al, 0x60
 
