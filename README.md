@@ -15,6 +15,9 @@ Tapix/
     ├── kernel_entry.asm
     └── libc/
         └── Minimal libc
+└──arch
+    └──x86
+        └──x86 basic tools
 ```
 ## Technologies
 ```text
