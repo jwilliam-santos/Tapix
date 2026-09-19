@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <vga.h>
-extern void keyboard(const unsigned char scancode);
-
+ void keyboard(const unsigned char scancode);
+extern void irq1asm(void);
 
 
 #endif
