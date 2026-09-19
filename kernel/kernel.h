@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <vga.h>
+#include <keyboard.h>
 
 
 #endif
