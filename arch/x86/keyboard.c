@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 bool Caps;
-extern volatile last_key;
+extern volatile char last_key;
 //Codigo Teclas Especiais em hexadecimal
 const uint32_t UNKNOWN = 0x00;       
 const uint32_t ESC     = 0x01;       
@@ -45,7 +45,7 @@ const uint32_t ENTER = 0x1C;  /*\n*/
 const uint32_t BACKSPACE = 0x0E; /*\b*/ 
 const uint32_t SPACE   = 0x39; 
 const uint32_t TAB = 0x0D; /*\t*/
-// Resto em Teclado.txt
+
 const uint32_t TeclasEspeciais[256] = {
     UNKNOWN,ESC,CTRL,LSHFT,RSHFT,ALT,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
     SCRLCK,HOME,UP,LEFT,RIGHT,DOWN,PGUP,PGDOWN,END,INS,DEL,CAPS,NONE,ALTGR,
@@ -76,7 +76,8 @@ uint8_t HighKeyboard[250] = {
     CTRL,ALT,SPACE,ALTGR
 };
 uint8_t *tecladomomento = LowKeyboard;
-void keyboard(const unsigned char scancode) {
+void keyboard( uint8_t scancode) {
+    scancode = inb(0x20);
     if (scancode < sizeof(tecladomomento)) {
         char c = tecladomomento[scancode];
         if (c != 0 && !(scancode & 0x80)) { // ignora key release (bit 7)
