@@ -62,28 +62,28 @@ static inline void outb(unsigned short port, unsigned char val) {
 uint8_t LowKeyboard[250] = {
     ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
     '|','1','2','3','4','5','6','7','8','9','0',BACKSPACE,
-    TAB,'q','w','e','r','t','y','u','i','o','p','´','+','}',
-    CAPS,'a','s','d','f','g','h','j','k','l','ñ','{',ENTER,
+    TAB,'q','w','e','r','t','y','u','i','o','p','p','+','}',
+    CAPS,'a','s','d','f','g','h','j','k','l','n','{',ENTER,
     LSHFT,'z','x','c','v','b','n','m',',','.','-',RSHFT,
     CTRL,ALT,SPACE,ALTGR,
 };
 uint8_t HighKeyboard[250] = {
     ESC,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,
-    '°','!','"','#','$','%','&','/','(',')','=','?','¡',BACKSPACE,
+    '°','!','"','#','$','%','&','/','(',')','=','?','?',BACKSPACE,
     TAB,'Q','W','E','R','T','Y','U','I','O','P','¨','*',']',
-    CAPS,'A','S','D','F','G','H','J','K','L','Ñ','[',ENTER,
+    CAPS,'A','S','D','F','G','H','J','K','L','N','[',ENTER,
     LSHFT,'Z','X','C','V','B','N','M',';',':','_',ENTER,
     CTRL,ALT,SPACE,ALTGR
 };
 uint8_t *tecladomomento = LowKeyboard;
 void keyboard( uint8_t scancode) {
-    scancode = inb(0x20);
+    scancode = inb(0x60);
     if (scancode < sizeof(tecladomomento)) {
         char c = tecladomomento[scancode];
         if (c != 0 && !(scancode & 0x80)) { // ignora key release (bit 7)
             last_key = c;
         }
     }
-    outb(0x60,0x60);
+    PIC_sendEOI(1);
 }
 

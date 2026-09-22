@@ -41,7 +41,7 @@ always:
 	mkdir -p $(BUILD_DIR)
 
 run: iso
-	qemu-system-x86_64 -cdrom $(BUILD_DIR)/Tapix.iso -d int,cpu_reset -D qemu.log -no-reboot -no-shutdown
+	qemu-system-x86_64 -cdrom $(BUILD_DIR)/Tapix.iso -d int,cpu_reset -D qemu.log -M smm=off -no-reboot -no-shutdown
 
 
 

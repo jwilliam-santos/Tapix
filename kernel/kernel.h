@@ -1,7 +1,7 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include <apic.h>
+#include <pic.h>
 #include <idt.h>
 #include <iso646.h>
 #include <limits.h>
