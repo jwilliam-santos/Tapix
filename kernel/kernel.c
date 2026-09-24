@@ -45,7 +45,7 @@ void kernel_main(void)
 
     ISRs();
     load_IDT();
-    geral_pic();
+    Geral_pic();
     asm volatile("sti");
 
     while(1){

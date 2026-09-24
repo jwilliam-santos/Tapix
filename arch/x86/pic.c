@@ -38,6 +38,33 @@ void pic_remap(uint8_t offset1, uint8_t offset2) {
     outb(0x21, 0x00);
     outb(0xA1, 0x00);
 }
+void IRQ_set_mask(uint8_t IRQline) {
+    uint16_t port;
+    uint8_t value;
+
+    if(IRQline < 8) {
+        port = PIC1_DATA;
+    } else {
+        port = PIC2_DATA;
+        IRQline -= 8;
+    }
+    value = inb(port) | (1 << IRQline);
+    outb(port, value);        
+}
+
+void IRQ_clear_mask(uint8_t IRQline) {
+    uint16_t port;
+    uint8_t value;
+
+    if(IRQline < 8) {
+        port = PIC1_DATA;
+    } else {
+        port = PIC2_DATA;
+        IRQline -= 8;
+    }
+    value = inb(port) & ~(1 << IRQline);
+    outb(port, value);        
+}
 void PIC_sendEOI(uint8_t irq)
 {
 	if(irq >= 8)
@@ -48,4 +75,5 @@ void PIC_sendEOI(uint8_t irq)
 void geral_pic(void)
 {
     pic_remap(0x20, 0x28);
+    IRQ_set_mask(1);
 }
