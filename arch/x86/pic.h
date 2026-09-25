@@ -14,7 +14,7 @@
 #define PIC1_DATA	(PIC1+1)
 #define PIC2_COMMAND	PIC2
 #define PIC2_DATA	(PIC2+1)
-void Geral_pic(void);
+void geral_pic(void);
 void PIC_sendEOI(uint8_t irq);
 
 #endif
