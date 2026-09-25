@@ -53,7 +53,7 @@ void kernel_main(void)
       asm("cli");
 
         if (last_key != 0) {
-            
+            vga_set_color(VGA_WHITE, VGA_BLACK);
             vga_putchar(last_key);
 
             last_key = 0;

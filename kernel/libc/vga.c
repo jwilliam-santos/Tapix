@@ -25,6 +25,8 @@ void vga_putchar(char c) {
         cursor = (cursor / VGA_WIDTH + 1) * VGA_WIDTH;
         if (cursor >= VGA_WIDTH * VGA_HEIGHT)
             cursor = 0;
+        vga_set_color(VGA_GREEN, VGA_BLACK);
+        vga_print("> ");
         return;
     }
 
