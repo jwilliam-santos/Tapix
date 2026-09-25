@@ -1,18 +1,21 @@
 #ifndef STRING_H
 #define STRING_H
 #include <stdint.h>
-
-void* memset(void* dest, int val, size_t count);
-void* memcpy(void* dest, const void* src, size_t count);
-void* memmove(void* dest, const void* src, size_t count);
-int    memcmp(const void* a, const void* b, size_t count);
-
-size_t strlen(const char* s);
-int    strcmp(const char* a, const char* b);
-int    strncmp(const char* a, const char* b, size_t n);
-char* strcpy(char* dest, const char* src);
-char* strncpy(char* dest, const char* src, size_t n);
-char* strcat(char* dest, const char* src);
-char* strchr(const char* s, int c);
+#include <stddef.h>
+char* strcpy(char* destination, const char* source);
+char* strncpy(char* destination, const char* source, size_t len);
+char* strcat(char* destination, const char* source);
+char* strncat(char* destination, const char* source, size_t len);
+int strcmp(const char* str1, const char* str2);
+int strncmp(const char* str1, const char* str2, size_t len);
+size_t strlen(const char* str);
+char* strchr(const char* str, int c);
+char* strrchr(const char* str, int c);
+char* strstr(const char* haystack, const char* needle);
+char* strrstr(const char* haystack, const char* needle);
+void* memcpy(void* destination, const void* source, size_t num);
+void* memmove(void* destination, const void* source, size_t num);
+int memcmp(const void* ptr1, const void* ptr2, size_t num);
+void* memset(void* source, int value, size_t num);
 
 #endif 
