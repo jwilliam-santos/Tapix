@@ -27,7 +27,7 @@ void ISRs(void){
     set_idt(19,isr19asm,0x08,0x8e,0);
     set_idt(20,isr20asm,0x08,0x8e,0);
     set_idt(21,isr21asm,0x08,0x8e,0);
-    set_idt(33,irq1asm,0x8,33,0);
+    set_idt(33,irq1asm,0x8,0x8e,0);
     
 }
 
@@ -39,13 +39,13 @@ void kernel_main(void)
    
 
     // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina
-    vga_set_color(VGA_BLUE,VGA_BLACK);
+    vga_set_color(VGA_RED,VGA_BLACK);
 
     /*ISRs 1 -> 21*/
 
+    geral_pic();
     ISRs();
     load_IDT();
-    Geral_pic();
     asm volatile("sti");
 
     while(1){
