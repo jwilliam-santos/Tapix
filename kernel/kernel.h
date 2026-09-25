@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <vga.h>
 #include <keyboard.h>
+#include <string.h>
 
 
 #endif

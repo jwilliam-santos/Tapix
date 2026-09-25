@@ -35,7 +35,7 @@ void ISRs(void){
 void kernel_main(void)
 {
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
-    vga_print(">");
+    vga_print(">");// pensar em um metodo que printe isso toda vez que apertar enter e que seja "inapagavel"
    
 
     // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina

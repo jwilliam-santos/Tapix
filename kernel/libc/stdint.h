@@ -14,5 +14,6 @@ typedef char i8_t;
 typedef short i16_t;
 typedef int i32_t;
 typedef long long i64_t;
+typedef unsigned long long size_t;
 
 #endif
