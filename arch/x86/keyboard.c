@@ -4,47 +4,47 @@
 bool Caps;
 extern volatile char last_key;
 //Codigo Teclas Especiais em hexadecimal
-const uint32_t UNKNOWN = 0x00;       
-const uint32_t ESC     = 0x01;       
-const uint32_t CTRL    = 0x1D;       
-const uint32_t LSHFT   = 0x2A;       
-const uint32_t RSHFT   = 0x36;        
-const uint32_t ALT     = 0x38;        
-const uint32_t F1 = 0x3B;
-const uint32_t F2 = 0x3C;
-const uint32_t F3 = 0x3D;
-const uint32_t F4 = 0x3E;
-const uint32_t F5  = 0x3F;
-const uint32_t F6  = 0x40;
-const uint32_t F7  = 0x41;
-const uint32_t F8  = 0x42;
-const uint32_t F9  = 0x43;
-const uint32_t F10 = 0x44;
-const uint32_t F11  = 0x57;        
-const uint32_t F12  = 0x58;
-const uint32_t SCRLCK = 0x46;       
-
-
-const uint32_t HOME  = 0x47;
-const uint32_t UP   = 0x48;
-const uint32_t LEFT  = 0x4B;
-const uint32_t RIGHT = 0x4D;
-const uint32_t DOWN  = 0x50;
-const uint32_t PGUP  = 0x49;
-const uint32_t PGDOWN = 0x51;
-const uint32_t END = 0x4F;
-const uint32_t INS = 0x52;
-const uint32_t DEL = 0x53;
-
-const uint32_t CAPS  = 0x3A;       
-const uint32_t NONE = 0x00;      
-const uint32_t ALTGR = 0x38;        
-const uint32_t NUMLCK = 0x45;       
-
-const uint32_t ENTER = 0x1C;  /*\n*/
-const uint32_t BACKSPACE = 0x0E; /*\b*/ 
-const uint32_t SPACE   = 0x39; 
-const uint32_t TAB = 0x0D; /*\t*/
+//const uint32_t UNKNOWN = 0x00;       
+//const uint32_t ESC     = 0x01;       
+//const uint32_t CTRL    = 0x1D;       
+//const uint32_t LSHFT   = 0x2A;       
+//const uint32_t RSHFT   = 0x36;        
+//const uint32_t ALT     = 0x38;        
+//const uint32_t F1 = 0x3B;
+//const uint32_t F2 = 0x3C;
+//const uint32_t F3 = 0x3D;
+//const uint32_t F4 = 0x3E;
+//const uint32_t F5  = 0x3F;
+//const uint32_t F6  = 0x40;
+//const uint32_t F7  = 0x41;
+//const uint32_t F8  = 0x42;
+//const uint32_t F9  = 0x43;
+//const uint32_t F10 = 0x44;
+//const uint32_t F11  = 0x57;        
+//const uint32_t F12  = 0x58;
+//const uint32_t SCRLCK = 0x46;       
+//
+//
+//const uint32_t HOME  = 0x47;
+//const uint32_t UP   = 0x48;
+//const uint32_t LEFT  = 0x4B;
+//const uint32_t RIGHT = 0x4D;
+//const uint32_t DOWN  = 0x50;
+//const uint32_t PGUP  = 0x49;
+//const uint32_t PGDOWN = 0x51;
+//const uint32_t END = 0x4F;
+//const uint32_t INS = 0x52;
+//const uint32_t DEL = 0x53;
+//
+//const uint32_t CAPS  = 0x3A;       
+//const uint32_t NONE = 0x00;      
+//const uint32_t ALTGR = 0x38;        
+//const uint32_t NUMLCK = 0x45;       
+//
+//const uint32_t ENTER = 0x1C;  /*\n*/
+//const uint32_t BACKSPACE = 0x0E; /*\b*/ 
+//const uint32_t SPACE   = 0x39; 
+//const uint32_t TAB = 0x0D; /*\t*/
 
 #define TECLADO_SIZE 128
 // Teclas do Teclado espanhol
@@ -66,16 +66,19 @@ static inline void outb(unsigned short port, unsigned char val) {
   __asm__ __volatile__("outb %0, %1" : : "a"(val), "Nd"(port));
 }
 const char LowKeyboard[128] = {
-    //  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
-        0,   27,  '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9',  '0',  '-',  '=',    8,    9, // 0x00
-      'q',  'w',  'e',  'r',  't',  'y',  'u',  'i',  'o',  'p',  '[',  ']',   13,    0,  'a',  's', // 0x10
-      'd',  'f',  'g',  'h',  'j',  'k',  'l',  ';', '\'',  '`',    0, '\\',  'z',  'x',  'c',  'v', // 0x20
-      'b',  'n',  'm',  ',',  '.',  '/',    0,  '*',    0,  ' ',    0,    0,    0,    0,    0,    0, // 0x30
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x40
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x50
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x60
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x70
+    //   0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
+         0,   27,  '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9',  '0', '\'',  '¡',  8,    9, // 0x00: Esc, numeros, apostrofo, "¡", Backspace, Tab
+       'q',  'w',  'e',  'r',  't',  'y',  'u',  'i',  'o',  'p',  '´',  '+',   13,    0,  'a',  's', // 0x10: QWERTY, acento agudo, "+", Enter, Ctrl(0), AS
+       'd',  'f',  'g',  'h',  'j',  'k',  'l',  'ñ',  '{',    0,    0,  '}',  'z',  'x',  'c',  'v', // 0x20: DFGHJKL, ñ, chaves, LShift(0), ZXCV
+       'b',  'n',  'm',  ',',  '.',  '-',    0,  '*',    0,  ' ',    0,    0,    0,    0,    0,    0, // 0x30: BNM, virgula, ponto, "-", RShift(0), teclado numerico *, Alt(0), Espaco, CapsLock(0), F1-F5(0)
+         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x40: F6-F10, NumLock, ScrollLock, teclado numerico (0)
+         0,    0,    0,    0,    0,    0,  '<',    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x50: teclado numerico, tecla ISO extra "<>" (0x56), F11/F12(0)
+         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x60: nao usado no Set 1 basico
+         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, // 0x70: nao usado no Set 1 basico
 };
+//const char LowKeyboard[128] = {
+//    /*Refazer do Estilo da Func colada Acima, padrao teclado Espanhol mexicano */
+//};
 uint8_t *tecladomomento = LowKeyboard;
 void keyboard(uint8_t scancode) {
     if (scancode < 250) {

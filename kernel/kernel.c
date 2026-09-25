@@ -39,7 +39,7 @@ void kernel_main(void)
    
 
     // vga_print(itoa((unsigned long)ptr)); MOSTRA VALOR onde kernel termina
-    vga_set_color(VGA_RED,VGA_BLACK);
+    vga_set_color(VGA_WHITE,VGA_BLACK);
 
     /*ISRs 1 -> 21*/
 
@@ -53,7 +53,9 @@ void kernel_main(void)
       asm("cli");
 
         if (last_key != 0) {
+            
             vga_putchar(last_key);
+
             last_key = 0;
         }
         asm("sti");
