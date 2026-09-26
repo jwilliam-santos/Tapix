@@ -32,7 +32,7 @@ Tapix/
 ```text
     sudo apt update
     sudo apt install -y make nasm qemu-system-x86 gcc binutils
-    git clone https://github.com/jwilliam-santos/Tapix 
+    git clone https://github.com/Ryuzaki-Nightmare/Tapix.git 
     cd Tapix
     make clean && make run
 ```
