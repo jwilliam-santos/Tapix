@@ -18,6 +18,11 @@
 static inline void outb(unsigned short port, unsigned char val) {
   __asm__ __volatile__("outb %0, %1" : : "a"(val), "Nd"(port));
 }
+uint8_t inbp(uint16_t porta ){
+    uint8_t variavel;
+    __asm__ __volatile__("inb %1, %0" : "=a"(variavel) : "Nd"(porta));
+    return variavel;
+}
 /*
 arguments:
 	offset1 - vector offset for master PIC
@@ -48,7 +53,7 @@ void IRQ_set_mask(uint8_t IRQline) {
         port = PIC2_DATA;
         IRQline -= 8;
     }
-    value = inb(port) | (1 << IRQline);
+    value = inbp(port) | (1 << IRQline);
     outb(port, value);        
 }
 
@@ -62,7 +67,7 @@ void IRQ_clear_mask(uint8_t IRQline) {
         port = PIC2_DATA;
         IRQline -= 8;
     }
-    value = inb(port) & ~(1 << IRQline);
+    value = inbp(port) & ~(1 << IRQline);
     outb(port, value);        
 }
 void PIC_sendEOI(uint8_t irq)
