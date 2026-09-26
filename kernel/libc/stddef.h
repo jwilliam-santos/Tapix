@@ -1,11 +1,13 @@
-#define __STDC_VERSION_STDDEF_H__ 202311L
+#ifndef _STDDEF_H
+#define _STDDEF_H
 
-typedef /* see description */ ptrdiff_t;
-typedef /* see description */ nullptr_t;
-typedef /* see description */ max_align_t;
-typedef /* see description */ wchar_t;
-typedef /* see description */ size_t;
+#ifndef NULL
+#define NULL ((void*)0)
+#endif
 
-#define NULL /* see description */
-#define unreachable() /* see description */
-#define offsetof(P, D) /* see description */
+typedef __PTRDIFF_TYPE__ ptrdiff_t;
+
+#define offsetof(type, member) __builtin_offsetof(type, member)
+#define unreachable() __builtin_unreachable()
+
+#endif
